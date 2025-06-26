@@ -9,7 +9,9 @@
 ## 预览
 由于此次预览来自我的新电脑**ThinkPad X1 Nano**，其屏幕尺寸较小，有一些没有录制成功（真的吗？）。不过问题不大，欢迎自己下载体验！
 
-<video src="https://github.com/user-attachments/assets/ba75ed5b-c9bb-4cbb-97cf-b2f35e8166c5" autoplay loop muted></video>
+<video src="https://github.com/user-attachments/assets/0e88334f-8db1-48e7-885b-ea54c983bcf3" autoplay loop muted></video>
+
+
 
 ## 安装
 
