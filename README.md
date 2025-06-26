@@ -11,6 +11,8 @@
 **灵感来源：**
 这个配置改进自 [@CuB3y0nd](https://github.com/CuB3y0nd) 的 [1llusion](https://github.com/CuB3y0nd/1llusion) 项目，在此特别感谢。
 
+如果你正在安装新的机器，可以参考[CuB3y0nd的安装笔记](https://www.assembly.rip/posts/linux/archlinux-configure-note/)，到`Bspwm`章节的时候或者之后，再来安装本脚本即可！
+
 ## 预览
 由于此次预览来自我的新电脑 **ThinkPad X1 Nano**，其屏幕尺寸较小，有一些没有录制成功（真的吗？）。不过问题不大，欢迎自己下载体验！
 
