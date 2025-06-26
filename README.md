@@ -1,4 +1,6 @@
 
+https://github.com/user-attachments/assets/9c534eb3-d19e-496f-833e-6dec96c88e5d
+
 # N1nEArch - 我的 Arch Linux 配置
 
 这是一个包含我个人 Arch Linux 配置文件的仓库。
@@ -7,15 +9,17 @@
 这个配置改进自 [@CuB3y0nd](https://github.com/CuB3y0nd) 的 [1llusion](https://github.com/CuB3y0nd/1llusion) 项目，在此特别感谢。
 
 ## 预览
-由于此次预览来自我的新电脑**ThinkPad X1 Nano**，其屏幕尺寸较小，有一些没有录制成功。不过问题不大，欢迎自己下载体验！
+由于此次预览来自我的新电脑**ThinkPad X1 Nano**，其屏幕尺寸较小，有一些没有录制成功（真的吗？）。不过问题不大，欢迎自己下载体验！
 
 
 
+https://github.com/user-attachments/assets/ba75ed5b-c9bb-4cbb-97cf-b2f35e8166c5
 
-Uploading 2025-06-27 03-18-43.mp4…
 
 
 ## 安装
+
+
 
 要安装和应用我的配置，只需克隆本仓库并运行安装脚本：
 
