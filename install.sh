@@ -1,10 +1,12 @@
 #!/bin/bash
-sh ./install_gtk_themes.sh
 # --- 配置区 ---
-# 临时解压目录，用于存放解压后的内容和临时的软件包列表
-TEMP_EXTRACT_DIR="$HOME/temp_dotfiles_restore"
-# 备份文件中包含的软件包列表文件名
+# 软件包列表文件，现在直接在当前目录查找
 PACKAGE_LIST_FILE="installed_packages.txt"
+# 请注意：`sudo sh ./install_gtk_themes.sh` 这一行被放置在了函数定义之前和配置区之后，
+# 这意味着它会在脚本启动时，在任何提示或检查之前立即执行。
+# 如果你希望它在某些检查（比如软件包安装）之后，或者用户确认之后再执行，
+# 你可能需要把它移动到脚本的相应位置。
+sudo sh ./install_gtk_themes.sh
 
 # --- 函数定义 ---
 
@@ -44,50 +46,36 @@ ask_yes_no() {
 # --- 脚本开始 ---
 
 print_pacman_info "欢迎使用智能 Arch Linux dotfiles 恢复脚本"
-print_pacman_info "此脚本将帮助您检查并安装缺失的软件包，然后选择性地恢复备份的配置文件。"
+print_pacman_info "此脚本将帮助您检查并安装缺失的软件包，然后选择性地恢复当前目录下的配置文件。"
 
 echo " "
-# 查找最新的备份文件
-LATEST_BACKUP=$(ls -t "$HOME"/arch_dotfiles_backup_*.tar.gz 2>/dev/null | head -n 1)
-
-if [ -z "$LATEST_BACKUP" ]; then
-  print_error "在您的家目录中找不到任何以 'arch_dotfiles_backup_' 开头并以 '.tar.gz' 结尾的备份文件。请确保备份文件已存在于您的 \$HOME 目录下。"
-fi
-
-BACKUP_FILE=$(basename "$LATEST_BACKUP")
-print_pacman_info "找到最新的备份文件: ${BACKUP_FILE}"
+print_pacman_info "当前目录内容如下，这些文件将被视为您的配置源："
+ls -F --color=always
 echo " "
 
-if ! ask_yes_no "是否要继续使用此备份文件进行恢复？"; then
+if ! ask_yes_no "是否要继续使用当前目录下的文件进行恢复？"; then
   print_pacman_info "用户取消，脚本退出。"
   exit 0
 fi
 
-# 创建临时目录
-if [ -d "$TEMP_EXTRACT_DIR" ]; then
-  print_warn "临时目录 '${TEMP_EXTRACT_DIR}' 已存在，正在删除旧目录..."
-  rm -rf "$TEMP_EXTRACT_DIR" || print_error "无法删除旧的临时目录，请手动检查或删除：${TEMP_EXTRACT_DIR}"
-fi
-mkdir -p "$TEMP_EXTRACT_DIR" || print_error "无法创建临时目录 '${TEMP_EXTRACT_DIR}'。"
-
-print_pacman_action "正在解压备份文件 '${HOME}/${BACKUP_FILE}' 到 '${TEMP_EXTRACT_DIR}'..."
-tar -xzvf "${HOME}/${BACKUP_FILE}" -C "${TEMP_EXTRACT_DIR}" || print_error "解压失败！请检查备份文件是否损坏或路径是否正确。"
-
 echo " "
 print_pacman_info "--- 软件包检查与安装 ---"
 
-# 检查软件包列表文件是否存在于备份中
-if [ ! -f "$TEMP_EXTRACT_DIR/$PACKAGE_LIST_FILE" ]; then
-  print_warn "备份中未找到软件包列表文件 '${PACKAGE_LIST_FILE}'。将跳过软件包安装步骤。"
+# 检查软件包列表文件是否存在于当前目录
+if [ ! -f "$PACKAGE_LIST_FILE" ]; then
+  print_warn "当前目录未找到软件包列表文件 '${PACKAGE_LIST_FILE}'。将跳过软件包安装步骤。"
   print_warn "您可能需要手动安装所有依赖的软件包。"
 else
   print_pacman_action "正在检查缺失的软件包..."
   MISSING_PACKAGES=()
-  while IFS= read -r pkg; do
-    if ! pacman -Q "$pkg" &>/dev/null; then
-      MISSING_PACKAGES+=("$pkg")
+  while IFS= read -r pkg_with_version; do
+    # 提取纯包名，移除版本号
+    pkg_name=$(echo "$pkg_with_version" | awk '{print $1}')
+
+    if ! pacman -Q "$pkg_name" &>/dev/null; then
+      MISSING_PACKAGES+=("$pkg_name") # 只将包名添加到缺失列表
     fi
-  done <"$TEMP_EXTRACT_DIR/$PACKAGE_LIST_FILE"
+  done <"$PACKAGE_LIST_FILE"
 
   if [ ${#MISSING_PACKAGES[@]} -eq 0 ]; then
     print_pacman_info "所有必需的软件包均已安装。"
@@ -104,7 +92,7 @@ else
       print_pacman_info "缺失软件包安装完成。"
     else
       print_warn "您选择不安装缺失的软件包。某些配置可能无法正常工作。"
-    fi
+    fi # <--- 这里是修复的地方，将 Hfi 改为 fi
   fi
 fi
 
@@ -114,9 +102,15 @@ print_pacman_info "现在将逐个询问您是否恢复各个配置模块..."
 echo " "
 
 # --- 复制配置文件（交互式） ---
-# 遍历临时解压目录中的所有项目
-# 排除 PACKAGE_LIST_FILE，因为它不是一个配置目录
-find "$TEMP_EXTRACT_DIR" -mindepth 1 -maxdepth 1 ! -name "$PACKAGE_LIST_FILE" | while read item; do
+# 遍历当前目录中的所有项目
+# 排除 PACKAGE_LIST_FILE，pack.sh, install.sh, install_gtk_themes.sh, README.md
+# 这些是脚本文件和文档，不应该被视为 dotfiles 复制
+find . -mindepth 1 -maxdepth 1 ! -name "$PACKAGE_LIST_FILE" \
+  ! -name "pack.sh" \
+  ! -name "install.sh" \
+  ! -name "install_gtk_themes.sh" \
+  ! -name "README.md" \
+  ! -name "*.pkg.tar.zst" | while read item; do
   ITEM_NAME=$(basename "$item")
   DEST_PATH="$HOME/$ITEM_NAME"
 
@@ -150,12 +144,10 @@ find "$TEMP_EXTRACT_DIR" -mindepth 1 -maxdepth 1 ! -name "$PACKAGE_LIST_FILE" | 
 done
 
 # --- 清理 ---
-print_pacman_action "正在清理临时目录 '${TEMP_EXTRACT_DIR}'..."
-rm -rf "$TEMP_EXTRACT_DIR" || print_warn "无法删除临时目录 '${TEMP_EXTRACT_DIR}'，请手动清理。"
-
+# 由于不再有临时目录，此部分已移除
 print_pacman_info "所有选择的 Dotfiles 和软件包安装已完成！"
 print_pacman_info "重要提示：您可能需要**重启应用程序或桌面会话**（注销再登录），甚至**重启电脑**，以使所有更改生效。"
-print_pacman_info "如果您安装了新的 GTK 主题或图标，可能需要使用 $(lxappearance) 或其他工具重新应用它们。"
+print_pacman_info "如果您安装了新的 GTK 主题或图标，可能需要使用 lxappearance 或其他工具重新应用它们。"
 
 echo " "
 print_pacman_info "祝您使用新 Arch Linux 愉快！"

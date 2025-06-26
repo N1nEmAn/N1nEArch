@@ -42,7 +42,6 @@ gh0stzk-icons-zafiro 1.0-0
 gh0stzk-icons-zafiro-purple 1.0-0
 i3lock-color 2.13.c.5-3
 inkscape 1.4.2-3
-intel-ucode 20250512-1
 iwd 3.9-1
 jgmenu 4.5.0-2
 kitty 0.42.1-1
@@ -59,8 +58,6 @@ ncdu 2.8.2-2
 ncmpcpp 0.10.1-4
 nemo 6.4.5-1
 nitrogen 1.6.1-6
-nvidia-dkms 575.64-1
-nvidia-prime 1.0-5
 pacman-contrib 1.12.0-1
 pamixer 1.6-3
 pamtester 0.1.2-4

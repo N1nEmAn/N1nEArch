@@ -41,7 +41,7 @@ add_gh0stzk_repo() {
   clear
   logo "Add gh0stzk custom repo"
   repo_name="gh0stzk-dotfiles"
-  sleep 2
+  sleep 0.2
 
   printf "%b\n" "${BLD}${CYE}Installing ${CBL}${repo_name}${CYE} repository...${CNC}"
 
@@ -60,72 +60,16 @@ add_gh0stzk_repo() {
     fi
   else
     printf "\n%b\n" "${BLD}${CYE}The repository already exists and is configured${CNC}"
-    sleep 3
+    sleep 0.3
     return 0
   fi
-}
-
-# --- 添加 chaotic-aur 仓库 ---
-add_chaotic_repo() {
-  clear
-  logo "Add chaotic-aur repository"
-  repo_name="chaotic-aur"
-  key_id="3056513887B78AEB"
-  sleep 2
-
-  printf "%b\n" "${BLD}${CYE}Installing ${CBL}${repo_name}${CYE} repository...${CNC}"
-
-  if grep -q "\[${repo_name}\]" /etc/pacman.conf; then
-    printf "%b\n" "\n${BLD}${CYE}Repository already exists in pacman.conf${CNC}"
-    sleep 3
-    return 0
-  fi
-
-  if ! pacman-key -l | grep -q "$key_id"; then
-    printf "%b\n" "${BLD}${CYE}Adding GPG key...${CNC}"
-    if ! sudo pacman-key --recv-key "$key_id" --keyserver keyserver.ubuntu.com 2>&1 | tee -a "$ERROR_LOG" >/dev/null; then
-      log_error "Failed to receive GPG key"
-      return 1
-    fi
-
-    printf "%b\n" "${BLD}${CYE}Signing key locally...${CNC}"
-    if ! sudo pacman-key --lsign-key "$key_id" 2>&1 | tee -a "$ERROR_LOG" >/dev/null; then
-      log_error "Failed to sign GPG key"
-      return 1
-    fi
-  else
-    printf "\n%b\n" "${BLD}${CYE}GPG key already exists in keyring${CNC}"
-  fi
-
-  chaotic_pkgs="chaotic-keyring chaotic-mirrorlist"
-  for pkg in $chaotic_pkgs; do
-    if ! pacman -Qq "$pkg" >/dev/null 2>&1; then
-      printf "%b\n" "${BLD}${CYE}Installing ${CBL}${pkg}${CNC}"
-      if ! sudo pacman -U --noconfirm "https://cdn-mirror.chaotic.cx/chaotic-aur/${pkg}.pkg.tar.zst" 2>&1 | tee -a "$ERROR_LOG" >/dev/null; then
-        log_error "Failed to install ${pkg}"
-        return 1
-      fi
-    else
-      printf "%b\n" "${BLD}${CYE}${pkg} is already installed${CNC}"
-    fi
-  done
-
-  printf "\n%b\n" "${BLD}${CYE}Adding repository to pacman.conf...${CNC}"
-  if ! printf "\n[%s]\nInclude = /etc/pacman.d/chaotic-mirrorlist\n" "$repo_name" |
-    sudo tee -a /etc/pacman.conf >/dev/null 2>>"$ERROR_LOG"; then
-    log_error "Failed to add repository configuration"
-    return 1
-  fi
-
-  printf "%b\n" "\n${BLD}${CBL}${repo_name} ${CGR}Repository configured successfully!${CNC}"
-  sleep 3
 }
 
 # --- 安装 gh0stzk 仓库依赖 ---
 install_gh0stzk_dependencies() {
   clear
   logo "Installing needed packages from gh0stzk repository..."
-  sleep 2
+  sleep 0.2
 
   gh0stzk_dependencies="
     gh0stzk-gtk-themes gh0stzk-cursor-qogirr gh0stzk-icons-beautyline
@@ -136,7 +80,7 @@ install_gh0stzk_dependencies() {
   "
 
   printf "%b\n\n" "\n${BLD}${CBL}Checking for required packages...${CNC}"
-  sleep 2
+  sleep 0.2
 
   missing_gh0stzk_pkgs=""
   for pkg in $gh0stzk_dependencies; do
@@ -177,7 +121,7 @@ install_gh0stzk_dependencies() {
     printf "\n%b\n" "${BLD}${CGR}All dependencies are already installed!${CNC}"
   fi
 
-  sleep 3
+  sleep 0.3
 }
 
 # --- 执行顺序（示例）---
@@ -186,5 +130,4 @@ install_gh0stzk_dependencies() {
 # welcome # 原始脚本中的欢迎界面，此处未包含
 
 add_gh0stzk_repo             # 添加 gh0stzk 仓库
-add_chaotic_repo             # 添加 chaotic-aur 仓库（因为 gh0stzk 的一些主题可能依赖 chaotic-aur 中的 paru 或其他包）
 install_gh0stzk_dependencies # 运行安装 gh0stzk 仓库依赖的函数
