@@ -1,6 +1,4 @@
 
-https://github.com/user-attachments/assets/9c534eb3-d19e-496f-833e-6dec96c88e5d
-
 # N1nEArch - 我的 Arch Linux 配置
 
 这是一个包含我个人 Arch Linux 配置文件的仓库。
@@ -13,7 +11,7 @@ https://github.com/user-attachments/assets/9c534eb3-d19e-496f-833e-6dec96c88e5d
 
 
 
-https://github.com/user-attachments/assets/ba75ed5b-c9bb-4cbb-97cf-b2f35e8166c5
+https://github.com/user-attachments/assets/9c534eb3-d19e-496f-833e-6dec96c88e5d
 
 
 
