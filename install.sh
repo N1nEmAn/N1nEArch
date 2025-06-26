@@ -38,7 +38,6 @@ ask_yes_no() {
     case $yn in
     [Yy]*) return 0 ;;
     [Nn]*) return 1 ;;
-    *) echo "请输入 y 或 n。" ;;
     esac
   done
 }
