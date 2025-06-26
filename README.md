@@ -1,5 +1,4 @@
 
-https://github.com/user-attachments/assets/3e6a75af-ad2b-4496-9ce3-4336982c5116
 # N1nEArch - 我的 Arch Linux 配置
 
 这是一个包含我个人 Arch Linux 配置文件的仓库。
@@ -11,8 +10,7 @@ https://github.com/user-attachments/assets/3e6a75af-ad2b-4496-9ce3-4336982c5116
 由于此次预览来自我的新电脑**ThinkPad X1 Nano*，其屏幕尺寸较小，有一些没有录制成功。不过问题不大，欢迎自己下载体验！
 
 
-Uploading 2025-06-27 03-04-3.mp4…
-
+https://github.com/user-attachments/assets/3e6a75af-ad2b-4496-9ce3-4336982c5116
 
 
 ## 安装
