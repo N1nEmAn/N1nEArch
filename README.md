@@ -12,7 +12,8 @@
 ```bash
 git clone https://github.com/N1nEmAn/N1nEArch.git
 cd N1nEArch
-sh install.sh
+chmod +x install.sh
+./install.sh
 ```
 
 **注意：**
