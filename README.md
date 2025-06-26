@@ -3,7 +3,7 @@
 ![Platform](https://img.shields.io/badge/platform-ArchLinux-blueviolet)
 ![Forks](https://img.shields.io/github/forks/N1nEmAn/N1nEArch)
 ![Stars](https://img.shields.io/github/stars/N1nEmAn/N1nEArch)
-![logo](https://github.com/user-attachments/assets/d20a1096-32ff-444b-9d06-8944ba33d1eb)
+![logol](https://github.com/user-attachments/assets/0453049c-ab69-42c0-bf82-d8b4871e52e0)
 
 
 这是一个包含我个人 Arch Linux 配置文件的仓库。
