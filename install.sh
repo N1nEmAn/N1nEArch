@@ -1,5 +1,5 @@
 #!/bin/bash
-sh ./install_gtk_themes.sh
+sudo sh ./install_gtk_themes.sh
 # --- 配置区 ---
 # 临时解压目录，用于存放解压后的内容和临时的软件包列表
 TEMP_EXTRACT_DIR="$HOME/temp_dotfiles_restore"
