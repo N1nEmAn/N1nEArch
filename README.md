@@ -1,5 +1,9 @@
 
 # N1nEArch - 我的 Arch Linux 配置
+![Platform](https://img.shields.io/badge/platform-ArchLinux-blueviolet)
+![Forks](https://img.shields.io/github/forks/N1nEmAn/N1nEArch)
+![Stars](https://img.shields.io/github/stars/N1nEmAn/N1nEArch)
+
 
 这是一个包含我个人 Arch Linux 配置文件的仓库。
 
