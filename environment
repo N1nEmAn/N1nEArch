@@ -1,0 +1,16 @@
+#
+# This file is parsed by pam_env module
+#
+# Syntax: simple "KEY=VAL" pairs on separate lines
+#
+export GTK_TM_MODULE=fcitx
+export QI_IM_MODULE=fcitx
+export VMODIFIERS=@im=fcitx
+SDL_IM_MODULE=fcitx
+export GLFW_IM_MODULE=ibus
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+INPUT_METHOD=fcitx
+SDL_IM_MODULE=fcitx
+GLFW_IM_MODULE=ibus

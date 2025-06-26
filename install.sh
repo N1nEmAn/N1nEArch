@@ -126,18 +126,77 @@ else
   fi
 fi
 
-# ---
-# Configuration File Restoration
-# ---
+---
+## 配置文件恢复
+---
+
 echo " "
-print_pacman_info "--- 配置文件恢复 ---"
 print_pacman_info "现在将逐个询问您是否恢复各个配置模块..."
 echo " "
 
-# --- Copy Configuration Files (Interactive) ---
-# Iterate over all items in the current directory
-# Exclude PACKAGE_LIST_FILE, pack.sh, install.sh, install_gtk_themes.sh, README.md, and .git
-# These are script files, documentation, or Git repository metadata, and should not be treated as dotfiles to copy
+# --- 特殊文件处理：environment 和 .xinitrc ---
+# 仅当这些文件存在于当前目录时才进行处理
+if [ -f "./environment" ] || [ -f "./.xinitrc" ]; then
+  echo "========================="
+  print_pacman_info "请问您是否在装新机？这两个文件涉及 X11 的配置，如果不是，请选择否。"
+  if ask_yes_no "是否要处理特殊的 X11 相关配置 (environment 和 .xinitrc)？"; then
+    if [ -f "./environment" ]; then
+      echo "========================="
+      print_pacman_info "发现特殊配置文件: environment"
+      print_pacman_info "目标路径: /etc/environment"
+      if ask_yes_no "是否要安装此模块的配置？"; then
+        if [ -f "/etc/environment" ]; then
+          print_warn "目标文件 '/etc/environment' 已存在。"
+          if ask_yes_no "是否要备份现有的 '/etc/environment' 配置？(强烈建议备份，避免数据丢失)"; then
+            BACKUP_DEST="/etc/environment.bak.$(date +%Y%m%d_%H%M%S)"
+            print_pacman_action "正在将现有 '/etc/environment' 备份到 '${BACKUP_DEST}'..."
+            sudo mv "/etc/environment" "$BACKUP_DEST" || print_error "备份旧配置失败！请检查权限或手动处理。"
+            print_pacman_info "旧配置已备份。"
+          else
+            print_warn "您选择不备份现有配置，现有配置将被覆盖！"
+          fi
+        fi
+        print_pacman_action "正在复制 'environment' 配置到 /etc/..."
+        sudo cp "./environment" "/etc/" || print_error "复制文件 'environment' 失败！"
+        print_pacman_info "'environment' 配置已安装。"
+      else
+        print_pacman_info "跳过 'environment' 配置的安装。"
+      fi
+    fi
+
+    if [ -f "./.xinitrc" ]; then
+      echo "========================="
+      print_pacman_info "发现特殊配置文件: .xinitrc"
+      print_pacman_info "目标路径: ~/.xinitrc"
+      if ask_yes_no "是否要安装此模块的配置？"; then
+        if [ -f "$HOME/.xinitrc" ]; then
+          print_warn "目标文件 '$HOME/.xinitrc' 已存在。"
+          if ask_yes_no "是否要备份现有的 '$HOME/.xinitrc' 配置？(强烈建议备份，避免数据丢失)"; then
+            BACKUP_DEST="$HOME/.xinitrc.bak.$(date +%Y%m%d_%H%M%S)"
+            print_pacman_action "正在将现有 '$HOME/.xinitrc' 备份到 '${BACKUP_DEST}'..."
+            mv "$HOME/.xinitrc" "$BACKUP_DEST" || print_error "备份旧配置失败！请检查权限或手动处理。"
+            print_pacman_info "旧配置已备份。"
+          else
+            print_warn "您选择不备份现有配置，现有配置将被覆盖！"
+          fi
+        fi
+        print_pacman_action "正在复制 '.xinitrc' 配置到 ~/..."
+        cp "./.xinitrc" "$HOME/" || print_error "复制文件 '.xinitrc' 失败！"
+        print_pacman_info "'.xinitrc' 配置已安装。"
+      else
+        print_pacman_info "跳过 '.xinitrc' 配置的安装。"
+      fi
+    fi
+  else
+    print_pacman_info "您选择跳过 X11 相关配置（environment 和 .xinitrc）的处理。"
+  fi
+  echo " "
+fi
+
+# --- 复制其他配置文件 (交互式) ---
+# 迭代当前目录中的所有项目
+# 排除 PACKAGE_LIST_FILE, pack.sh, install.sh, install_gtk_themes.sh, README.md, .git, environment, 和 .xinitrc
+# 这些是脚本文件、文档或 Git 仓库元数据，以及已特殊处理的 X11 相关文件，不应作为常规 dotfiles 复制
 find . -mindepth 1 -maxdepth 1 \
   ! -name "$PACKAGE_LIST_FILE" \
   ! -name "pack.sh" \
@@ -145,7 +204,9 @@ find . -mindepth 1 -maxdepth 1 \
   ! -name "install_gtk_themes.sh" \
   ! -name "README.md" \
   ! -name "*.pkg.tar.zst" \
-  ! -name ".git" | while read item; do
+  ! -name ".git" \
+  ! -name "environment" \
+  ! -name ".xinitrc" | while read item; do
   ITEM_NAME=$(basename "$item")
 
   # 判断是否为 zsh 相关的配置文件
@@ -187,10 +248,10 @@ find . -mindepth 1 -maxdepth 1 \
   echo " "
 done
 
-# ---
-# Cleanup
-# ---
-# This section is removed as there is no temporary directory anymore
+---
+## 清理与提示
+---
+
 print_pacman_info "所有选择的 Dotfiles 和软件包安装已完成！"
 print_pacman_info "重要提示：您可能需要**重启应用程序或桌面会话**（注销再登录），甚至**重启电脑**，以使所有更改生效。"
 print_pacman_info "如果您安装了新的 GTK 主题或图标，可能需要使用 lxappearance 或其他工具重新应用它们。"
