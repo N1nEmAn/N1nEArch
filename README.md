@@ -7,7 +7,8 @@
 这个配置改进自 [@CuB3y0nd](https://github.com/CuB3y0nd) 的 [1llusion](https://github.com/CuB3y0nd/1llusion) 项目，在此特别感谢。
 
 ## 预览
-由于此次预览来自我的新电脑**ThinkPad X1 Nano*，其屏幕尺寸较小，有一些没有录制成功。不过问题不大，欢迎自己下载体验！
+由于此次预览来自我的新电脑**ThinkPad X1 Nano**，其屏幕尺寸较小，有一些没有录制成功。不过问题不大，欢迎自己下载体验！
+
 
 
 https://github.com/user-attachments/assets/3e6a75af-ad2b-4496-9ce3-4336982c5116
