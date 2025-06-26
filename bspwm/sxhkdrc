@@ -66,17 +66,17 @@ Print
 
 # Power off, Reboot, Log out, Lockscreen, Select an App/Process to kill
 ctrl + super + shift + {p,r,q,l,f}
-	{poweroff, systemctl reboot,bspc quit,/home/S3vn/.config/bspwm/lock -r,systemctl poweroff  && rm /tmp/.bspwm_flag}
+	{poweroff, systemctl reboot,bspc quit,/home/$USER/.config/bspwm/lock -r,systemctl poweroff  && rm /tmp/.bspwm_flag}
 	# {systemctl poweroff, systemctl reboot,bspc quit,physlock -d,xkill}
 
 super + c
   cheese
 
 super + l
-  /home/S3vn/.config/bspwm/lock -r
+  /home/$USER/.config/bspwm/lock -r
 
 alt + l
-  /home/S3vn/.config/bspwm/lock -r
+  /home/$USER/.config/bspwm/lock -r
 # Firefox, Thunar, Pavucontrol, Ranger, Telegram, Listen1, 1llusion
 super + shift + {b,n,p,r,o,m,e,t}
 	{microsoft-edge-dev, \
