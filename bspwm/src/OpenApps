@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+
+WIDGET_DIR="$HOME/.config/bspwm/eww"
+
+case "$1" in
+--menu)
+  RofiLauncher --launcher
+  ;;
+--rice)
+  RiceSelector
+  ;;
+--terminal)
+  Term --terminal
+  ;;
+--floating)
+  Term --floating
+  ;;
+--update)
+  Term --update
+  ;;
+--checkupdates)
+  Term --checkupdates
+  ;;
+--netmanager)
+  NetManagerDM
+  ;;
+--bluetooth)
+  rofi-bluetooth
+  ;;
+--clipboard)
+  clipcat-menu
+  ;;
+--screenshot)
+  ScreenShoTer
+  ;;
+--powermenu)
+  PowerMenu
+  ;;
+--keyboard)
+  KeyBoardL
+  ;;
+--yazi)
+  Term --yazi
+  ;;
+--nvim)
+  Term --nvim
+  ;;
+--music)
+  Term --music
+  ;;
+--fetch)
+  Term --fetch
+  ;;
+--scratch)
+  ScratchPad
+  ;;
+
+# Apps
+--filemanager)
+  thunar
+  ;;
+--browser)
+  firefox
+  ;;
+--soundcontrol)
+  pavucontrol
+  ;;
+
+# Eww Widgets
+--KeyHelp)
+  eww -c "$WIDGET_DIR" open --toggle csheet
+  ;;
+--usercard)
+  eww -c "$WIDGET_DIR" open --toggle launchermenu
+  ;;
+--player)
+  eww -c "$WIDGET_DIR" open --toggle music
+  ;;
+--calendar)
+  eww -c "$WIDGET_DIR" open --toggle date
+  ;;
+*)
+  echo "Invalid Option"
+  ;;
+esac

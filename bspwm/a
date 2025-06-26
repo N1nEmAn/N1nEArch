@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# 确保配置目录存在
+config_dir="$HOME/.config/bspwm/rices"
+if [ ! -d "$config_dir" ]; then
+  echo "错误：配置目录 $config_dir 不存在！"
+  exit 1
+fi
+
+# 查找所有config.ini文件
+config_files=$(find "$config_dir" -type f -name "config.ini")
+
+if [ -z "$config_files" ]; then
+  echo "未找到配置文件！"
+  exit 0
+fi
+
+# 备份目录
+backup_dir="$HOME/polybar_config_backups/$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$backup_dir"
+
+# 处理每个配置文件
+echo "开始清理Polybar配置文件..."
+counter=0
+
+while IFS= read -r config_file; do
+  # 创建备份
+  cp "$config_file" "$backup_dir/$(basename "$config_file")_$(date +%s)_$counter"
+
+  # 替换内容
+  sed -i '/^\s*\(tray\|sep2\|tray sep\)\s*=/d' "$config_file"
+
+  # 统计
+  ((counter++))
+done <<<"$config_files"
+
+echo "清理完成！"
+echo "共处理 $counter 个配置文件"
+echo "备份文件保存在: $backup_dir"

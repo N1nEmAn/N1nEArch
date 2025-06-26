@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+class=$2
+instance=$3
+consequences=$4
+
+result() {
+  eval "$consequences"
+  [ "$state" ] || echo "$1"
+}
+
+case "$class" in
+FloaTerm)
+  result "state=floating center=on rectangle=1125x635+0+0"
+  ;;
+Updating)
+  result "state=floating sticky=on center=on rectangle=600x650+0+0"
+  ;;
+RiceEditor)
+  result "state=floating focus=on center=on"
+  ;;
+Scratch)
+  result "state=floating focus=on sticky=on"
+  ;;
+mpv)
+  result "state=floating focus=on center=on rectangle=723x407+0+0"
+  ;;
+Viewnior)
+  result "state=floating focus=on center=on"
+  ;;
+pavucontrol)
+  result "state=floating center=on"
+  ;;
+Virt-manager)
+  result "state=floating desktop=^5 follow=on center=on"
+  ;;
+Thunar)
+  result "desktop=^2 follow=on"
+  ;;
+firefox | Navigator)
+  result "desktop=^1 follow=on"
+  ;;
+Spotify)
+  result "state=floating desktop=^8 follow=on center=on"
+  ;;
+discord)
+  result "desktop=^7 follow=on center=on"
+  ;;
+bottles)
+  result "desktop=^2 follow=on center=on"
+  ;;
+esac
+
+case "$instance" in
+Toolkit)
+  result "state=floating sticky=on rectangle=500x290+1054+593"
+  ;;
+YaziTerm)
+  result "state=floating center=on rectangle=900x342+0+0"
+  ;;
+MusicTerm)
+  result "state=floating center=on rectangle=656x343+0+0"
+  ;;
+FetchTerm)
+  result "state=floating center=on rectangle=369x601+0+0"
+  ;;
+esac

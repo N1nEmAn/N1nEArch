@@ -1,0 +1,280 @@
+#  ╔═╗═╗ ╦╦ ╦╦╔═╔╦╗╦═╗╔═╗
+#  ╚═╗╔╩╦╝╠═╣╠╩╗ ║║╠╦╝║  
+#  ╚═╝╩ ╚═╩ ╩╩ ╩═╩╝╩╚═╚═╝
+
+#
+# User
+#
+
+# Show Keybindings Help
+super + F1
+	KeybindingsHelp
+alt + F1
+	KeybindingsHelp
+
+# Reload Keybindings
+super + Escape
+	pkill -USR1 -x sxhkd; dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'sxhkd' 'The configuration file has been reloaded successfully!'
+
+#AOT
+super + J
+  wine ~/Public/RC64/AottgRC64/AottgRC.exe
+
+# Applicacion Menu
+super + @space
+	OpenApps --menu
+
+shift + @space
+  OpenApps --menu
+
+# Theme Selector
+alt + @space
+	RiceSelector
+
+# Get Updates
+alt + u
+  OpenApps --update
+
+# Check Updates
+ctrl + alt + u
+  OpenApps --checkupdates
+
+alt + shift + l
+	OpenApps --terminal
+
+# Open Terminal (alacritty)
+super + shift + Return
+	OpenApps --terminal
+alt + shift + Return
+	OpenApps --terminal
+	
+# Open Floating Terminal
+alt + shift + f
+	OpenApps --floating
+
+# Open Scratchpad Terminal
+alt + shift + s
+	tdrop -a -w 70% -h 35% -y 0 -x 15%  --class scratch alacritty --class=scratch
+
+#shotscreen
+ctrl + alt + s
+	flameshot gui
+ctrl + super + s
+	flameshot gui
+Print
+	flameshot gui
+
+# Power off, Reboot, Log out, Lockscreen, Select an App/Process to kill
+ctrl + super + shift + {p,r,q,l,f}
+	{poweroff, systemctl reboot,bspc quit,/home/S3vn/.config/bspwm/lock -r,systemctl poweroff  && rm /tmp/.bspwm_flag}
+	# {systemctl poweroff, systemctl reboot,bspc quit,physlock -d,xkill}
+
+super + c
+  cheese
+
+super + l
+  /home/S3vn/.config/bspwm/lock -r
+
+alt + l
+  /home/S3vn/.config/bspwm/lock -r
+# Firefox, Thunar, Pavucontrol, Ranger, Telegram, Listen1, 1llusion
+super + shift + {b,n,p,r,o,m,e,t}
+	{microsoft-edge-dev, \
+   nemo, \
+   pavucontrol, \
+   rustdesk, \
+   obsidian, \
+   env DESKTOPINTEGRATION=no /opt/appimages/listen1.AppImage --no-sandbox, \
+   OpenApps --nvim,\
+   typora}
+   #OpenApps --music, \
+   #whatsapp-nativefier --disable-gpu, \
+	 #env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --disable-gpu --no-zygote %U, \}
+
+# Hide/Show Bar (Polybar and/or eww)
+super + {h,u}
+	HideBar {-h,-u}
+# ida64
+ctrl + 4
+	~/Public/ida9/ida
+
+ctrl + shift + {plus,minus, r}
+	{picom-trans -c -o +3, picom-trans -c -o -1, picom-trans -c -d}
+
+# Screenshot Now
+Print
+	ScreenShoTer --now
+
+# Select an area screenshot
+ctrl + Print
+	ScreenShoTer --sel
+
+# Screenshot in 10s
+alt + Print
+	ScreenShoTer --in10
+
+# Random Wallpaper
+super + shift + w
+	feh -z --no-fehbg --bg-fill ~/.config/bspwm/rices/$RICETHEME/walls/
+
+#
+# BSPWM
+#
+
+# Reload BSPWM
+super + r
+	bspc wm -r
+
+alt + shift + r
+	bspc wm -r
+
+#linuxqq
+super + q
+	linuxqq
+# Close and Kill
+
+ctrl + alt + {_,shift + }q
+	bspc node -{c,k}
+ctrl + {_,shift + }q
+	bspc node -{c,k}
+
+#wechat
+super + w
+  /opt/wechat/wechat
+
+
+# Rotate App
+super + ctrl + r
+	bspc node @/ --rotate {90,-90}
+
+# Circulate switch window in nodes
+super + c
+	bspc node @/ --circulate {backward,forward}
+
+# Make split ratios equal
+super + equal
+	bspc node @/ --equalize
+
+# Make split ratios balanced
+super + minus
+	bspc node @/ --balance
+
+# Alternate between the Tiled and Monocle layout
+super + m
+	bspc desktop -l next
+
+# Swap in the current node and the biggest node
+super + g
+	bspc node -s biggest
+
+# gpt4all
+super + p
+	~/gpt4all/bin/chat
+
+# burpsuite
+super + b 
+  burp
+# Set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# Set the node flags
+#ctrl + alt + {m,x,s,p,i}
+#	bspc node -g {marked,locked,sticky,private,hidden}
+
+# Focused desktop window gaps scroll
+super + button{4,5}
+	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 2 ))
+
+# Global window gaps scroll
+super + alt + button{4,5}
+	bspc config window_gap $(( $(bspc config window_gap) {-,+} 2 ))
+
+# Focus the node in the given direction
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+# Focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# Focus the Next/Previous node in the current desktop
+#alt + {_,shift + }Tab
+#	bspc node -f {next,prev}.local
+
+# Focus the Next/Previous desktop in the current monitor
+super + alt + {Left,Right}
+	bspc desktop -f {prev,next}.local
+
+# Focus the last Node/Desktop
+alt + {grave,Tab}
+	bspc {node,desktop} -f last
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# Focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# 使用 alt 键加数字键 (1-9) 来切换桌面，以及 minus 和 equal 键来切换到第 11 和 12 个桌面
+super + {_,shift + }{1-9,0,minus,equal,q,w,e,r,y,i}
+	bspc {desktop -f,node -d} '^{1-9,10,11,12,13,14,15,16,17,18}'
+
+# 使用 alt 键加数字键 (1-9) 来切换桌面，以及 minus 和 equal 键来切换到第 11 和 12 个桌面
+alt + {_,shift + }{1-9,0,minus,equal,q,w,e,r,y,u}
+	bspc {desktop -f,node -d} '^{1-9,10,11,12,13,14,15,16,17,18}'
+#
+# super + {_,shift + }{1-9,0,minus,equal}
+# 	bspc {desktop -f,node -d} '^{1-9,10,11,12}'
+# Preselect
+#
+
+super + c
+  ~/Public/clash-verge_1.3.8_amd64.AppImage
+
+# # Preselect the direction
+# super + ctrl + {Left,Down,Up,Right}
+# 	bspc node -p {west,south,north,east}
+
+# Preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# Cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# Cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# Move/Resize
+#
+
+# Expand a window by moving one of its side outward
+super + ctrl + {Left,Down,Up,Right}
+	bspc node -z {left -30 0,bottom 0 30,top 0 -30,right 30 0}
+
+# Contract a window by moving one of its side inward
+# super + ctrl + shift + {h,j,k,l}
+# 	bspc node -z {right -10 0,top 0 10,bottom 0 -10,left 10 0}
+
+# Move a floating window
+alt + shift + {Left,Down,Up,Right}
+	bspc node -v {-10 0,0 10,0 -10,10 0}
+
+# Manage Brightness
+XF86MonBrightness{Up,Down}
+    sh Brightness {up,down}
+
+# Volume Control
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+	Volume{ --inc, --dec, --toggle}
+
+# Music Control
+XF86Audio{Next,Prev,Play,Stop}
+	MediaControl {--next,--previous,--toggle,--stop}
+

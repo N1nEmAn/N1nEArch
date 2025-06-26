@@ -1,0 +1,15 @@
+Hello, welcome to BSPWM!
+
+Maybe it's your first time using a window manager or maybe not, here are some tips so you don't feel so lost.
+  · You can always visit my Wiki https://github.com/CuB3y0nd/1llusion/wiki
+
+    - (Alt + F1) For a list of all keyboard shortcuts (If it doesn't open, please visit https://github.com/CuB3y0nd/1llusion/wiki/Install-eww)
+    - (Alt + Enter) Opens the terminal
+    - (Super + X) To close Windows/Apps
+    - (Super + Space) Open the apps launcher
+    - (Alt + Space) Open the theme selector
+    - (Super + {h, l}) Move between workspaces
+
+Please check the menu of all keyboard shortcuts by pressing "Alt + F1" or directly by looking at the file `~/.config/bspwm/sxhkdrc` from this file you can create your own keyboard shortcuts or modify the existing ones.
+
+Using a WM at first can be difficult and intimidating, but once you get used to it, you never go back to a DE.

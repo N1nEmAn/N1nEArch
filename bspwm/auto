@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Check if HDMI-1 is connected
+if xrandr | grep "HDMI-A-0 connected"; then
+  # Check if HDMI-1 is already the primary display
+  echo yes
+  if ! xrandr --current | grep "HDMI-A-0 connected primary"; then
+    # Set HDMI-1 as primary display
+    if ! xrandr --output HDMI-A-0 --mode 3840x2160 --right-of eDP; then
+      echo yes 2560x1440
+      xrandr --output HDMI-A-0 --mode 2560x1440 --right-of eDP
+    fi
+    # Rotate eDP-1 to left
+    # xrandr --output eDP --rotate left
+  fi
+fi
+
+if ! xrandr | grep "HDMI-A-0 connected"; then
+  # Check if HDMI-1 is already the primary display
+  if xrandr --current | grep "eDP connected 1600x2560+0+0 left "; then
+    # Set HDMI-1 as primary display
+    xrandr --output eDP --primary
+    # Rotate eDP-1 to left
+    xrandr --output eDP --rotate normal
+  fi
+fi

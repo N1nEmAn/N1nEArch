@@ -1,0 +1,10 @@
+Net/IconThemeName "Sweet-Rainbow"
+Gtk/FontName "JetBrainsMono Nerd Font 10"
+Net/ThemeName "z0mbi3Night-zk"
+Gtk/CursorThemeName "Qogirr-Dark"
+Gtk/CursorThemeSize 32
+Gtk/DecorationLayout ":"
+Xft/Hinting 1
+Xft/HintStyle "hintfull"
+Xft/Antialias 1
+Xft/RGBA "none"
