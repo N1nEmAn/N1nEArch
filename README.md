@@ -17,6 +17,7 @@
 - 如果你对视频中最后不输密码就可以解锁的方式（**指纹解锁**！👆）感兴趣，可以参考 [这个方案](https://www.cnblogs.com/9man/p/18951122) ，而对应的配置也大多已经配好，你只需要做一点录入指纹之类的操作即可！
 - 如果你对**远程控制** 🎮 感兴趣，性价比最高方案是直接在不同设备安装 [Tailscale](https://github.com/tailscale/tailscale) 从而达到 `p2p` 连接的效果，然后使用 [RustDesk](https://github.com/rustdesk/rustdesk) 进行连接即可！如果特别感兴趣，可以参考性能最强方案 [阳光月光连接](https://www.cnblogs.com/9man/p/18635994)。
 - 以上提到的软件包均可直接用 `yay` 或者 `paru` 安装，简单，方便！📦
+- 如果你正在尝试安装和使用，欢迎[与我进行交流](https://github.com/N1nEmAn/)！☎️
 
 ## 预览
 由于此次预览来自我的新电脑 **ThinkPad X1 Nano** 💻，其屏幕尺寸较小，有一些没有录制成功（真的吗？ 🤔）。不过问题不大，欢迎自己下载体验！
