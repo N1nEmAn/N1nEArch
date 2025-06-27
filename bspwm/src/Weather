@@ -102,7 +102,7 @@ case "$1" in
   printf "%%{F%s}%s%%{F-} %s°\n" "$hex" "$icon" "$W_TEMP"
   ;;
 *)
-  echo "Opción no válida"
+  echo "Have a Nice Day ~"
   exit 1
   ;;
 esac
