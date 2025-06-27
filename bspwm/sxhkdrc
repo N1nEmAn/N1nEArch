@@ -59,26 +59,26 @@ alt + shift + s
 #shotscreen
 ctrl + alt + s
 	flameshot gui
-ctrl + super + s
-	flameshot gui
+ctrl + alt + w
+	/home/$USER/.config/bspwm/ocr.sh
 Print
 	flameshot gui
 
 # Power off, Reboot, Log out, Lockscreen, Select an App/Process to kill
 ctrl + super + shift + {p,r,q,l,f}
-	{poweroff, systemctl reboot,bspc quit,/home/$USER/.config/bspwm/lock -r,systemctl poweroff  && rm /tmp/.bspwm_flag}
+	{poweroff, systemctl reboot,bspc quit,/home/S3vn/.config/bspwm/lock -r,systemctl poweroff  && rm /tmp/.bspwm_flag}
 	# {systemctl poweroff, systemctl reboot,bspc quit,physlock -d,xkill}
 
 super + c
   cheese
 
 super + l
-  /home/$USER/.config/bspwm/lock -r
+  /home/S3vn/.config/bspwm/lock -r
 
 alt + l
-  /home/$USER/.config/bspwm/lock -r
+  /home/S3vn/.config/bspwm/lock -r
 # Firefox, Thunar, Pavucontrol, Ranger, Telegram, Listen1, 1llusion
-super + shift + {b,n,p,r,o,m,e,t}
+super + shift + {b,n,p,r,o,m,e,t,u}
 	{microsoft-edge-dev, \
    nemo, \
    pavucontrol, \
@@ -86,8 +86,9 @@ super + shift + {b,n,p,r,o,m,e,t}
    obsidian, \
    env DESKTOPINTEGRATION=no /opt/appimages/listen1.AppImage --no-sandbox, \
    OpenApps --nvim,\
-   typora}
-   #OpenApps --music, \
+   typora,\
+   termius}
+   #OmenApps --music, \
    #whatsapp-nativefier --disable-gpu, \
 	 #env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --disable-gpu --no-zygote %U, \}
 
