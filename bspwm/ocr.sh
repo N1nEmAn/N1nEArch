@@ -129,7 +129,7 @@ echo "$CLEANED_TEXT" | xclip -selection clipboard
 
 # 5. Optional: Send a notification to the user that OCR is complete and copied to clipboard
 # Extract the first 10 characters for preview; if text is shorter, show all.
-TEXT_PREVIEW="${CLEANED_TEXT:0:10}"
+TEXT_PREVIEW="${CLEANED_TEXT:0:20}"
 notify-send "OCR complete!" "Screenshot text copied to clipboard!\nPreview: ${TEXT_PREVIEW}"
 
 # 6. Clean up temporary files
