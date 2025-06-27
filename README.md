@@ -22,7 +22,11 @@
 ## 预览
 由于此次预览来自我的新电脑 **ThinkPad X1 Nano** 💻，其屏幕尺寸较小，有一些没有录制成功（真的吗？ 🤔）。不过问题不大，欢迎自己下载体验！
 
-<video src="https://github.com/user-attachments/assets/0e88334f-8db1-48e7-885b-ea54c983bcf3" autoplay loop muted></video>
+<video src="
+https://github.com/user-attachments/assets/08f341ae-4ee3-4628-b3ed-2f90927f659e" autoplay loop muted></video>
+
+
+
 
 
 
