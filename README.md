@@ -46,6 +46,16 @@ chmod +x install.sh
 
 其中，按键 `alt` + `F1` 查看快捷键说明，在`~/.config/bspwm/sxhkdrc`中自定义快捷键——按键 `super` + `Esc` 应用。当然如果你把应用快捷键的快捷键改了，那刚才这个快捷键就不管用了。
 
+关于鼠标主题的配置需要你在`~/.Xresources`中写下：
+```sh
+Xft.dpi: 135
+Xcursor.theme: Qogirr 
+Xcursor.size: 32
+```
+
+其中的135调成你认为合适的缩放。
+
+不写可能也行，光标主题满意即可。
 
 ⚠️ 注意：
 
