@@ -22,8 +22,7 @@ super + J
 
 # hide window
 ctrl + alt + z
-    bspc node -g hidden
-
+    bspc node -d 99
 # wake up the window
 ctrl + alt + c
     /home/$USER/.config/bspwm/wake_up_window.sh
