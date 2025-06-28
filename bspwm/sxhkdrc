@@ -99,14 +99,11 @@ super + shift + {b,n,p,r,o,m,e,t,u}
    #whatsapp-nativefier --disable-gpu, \
 	 #env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --disable-gpu --no-zygote %U, \}
 
-# Hide/Show Bar (Polybar and/or eww)
-super + 
-	HideBar {-h,-u}
 # ida64
 ctrl + 4
 	~/Public/ida9/ida
 
-ctrl + shift + {plus,minus, r}
+super + {equal,minus, r}
 	{picom-trans -c -o +3, picom-trans -c -o -1, picom-trans -c -d}
 
 # Screenshot Now
