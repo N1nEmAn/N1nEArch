@@ -8,6 +8,9 @@
 
 这是一个包含我个人 Arch Linux 配置文件的仓库。希望它能帮助你快速打造一个高效、美观的桌面环境！🚀
 
+**精彩彩蛋：**
+点击[这里](https://www.cnblogs.com/9man/p/18953039)查看我的指纹配置的各种奇怪探索！
+
 **灵感来源：**
 这个配置改进自 [@CuB3y0nd](https://github.com/CuB3y0nd) 的 [1llusion](https://github.com/CuB3y0nd/1llusion) 项目，在此特别感谢！🙏
 
