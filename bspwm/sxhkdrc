@@ -20,6 +20,14 @@ super + Escape
 super + J
   wine ~/Public/RC64/AottgRC64/AottgRC.exe
 
+# hide window
+ctrl + alt + z
+    bspc node -g hidden
+
+# wake up the window
+ctrl + alt + c
+    /home/$USER/.config/bspwm/wake_up_window.sh
+
 # Applicacion Menu
 super + @space
 	OpenApps --menu
@@ -93,7 +101,7 @@ super + shift + {b,n,p,r,o,m,e,t,u}
 	 #env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --disable-gpu --no-zygote %U, \}
 
 # Hide/Show Bar (Polybar and/or eww)
-super + {h,u}
+super + 
 	HideBar {-h,-u}
 # ida64
 ctrl + 4
