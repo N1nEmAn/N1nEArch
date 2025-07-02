@@ -89,7 +89,7 @@ super + shift + {b,n,p,r,o,m,e,t,u}
 	{microsoft-edge-dev, \
    nemo, \
    pavucontrol, \
-   rustdesk, \
+   XDG_SESSION_TYPE=x11 rustdesk, \
    obsidian, \
    env DESKTOPINTEGRATION=no /opt/appimages/listen1.AppImage --no-sandbox, \
    OpenApps --nvim,\
